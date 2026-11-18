@@ -6,9 +6,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Stille Helden">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#14123a">
-<title>Stille Helden</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f7f4ff">
+<title>Stille Heldinnen und Helden 6c</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
@@ -57,7 +57,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 header.top { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; padding-bottom: 14px; }
 .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.brand small { color: var(--muted); font-size: 15px; }
+.brand small { color: var(--muted); font-size: 21px; }
 nav.tabs { display: flex; gap: 6px; flex-wrap: wrap; background: var(--surface); padding: 6px; border-radius: 16px; }
 nav.tabs button { border: 0; background: transparent; padding: 10px 16px; border-radius: 11px; font-weight: 700; color: var(--muted); min-height: 44px; }
 nav.tabs button[aria-selected="true"] { background: var(--gold); color: var(--ink); }
@@ -155,6 +155,32 @@ textarea { min-height: 160px; resize: vertical; }
 #toast.show { opacity: 1; transform: translateX(-50%); }
 #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 40; }
 @media (prefers-reduced-motion: reduce) { .mcard, .hero { animation: none; } }
+
+/* ---- Pastell-Look ---- */
+:root {
+  --bg: #f7f4ff; --surface: #ffffff; --surface2: #efe9ff; --line: #d9d0f5;
+  --fg: #2c2a5a; --muted: #6b68a0; --gold: #ffd36b; --pink: #ff9fbd; --cyan: #8fd9e6;
+  --lime: #a8e6a1; --violet: #b49cff; --orange: #ffb98a; --ink: #2c2a5a; --goldtext: #a36500;
+  color-scheme: light;
+}
+body { background-image: radial-gradient(900px 500px at 85% -10%, rgba(180,156,255,.35), transparent 60%), radial-gradient(700px 400px at -5% 110%, rgba(143,217,230,.35), transparent 60%); }
+:focus-visible { outline-color: #e2a600; }
+.btn:hover { filter: brightness(.97); }
+.btn.pink, .rb.no[aria-pressed="true"] { color: var(--ink); }
+.panel, .gcard, .hero { box-shadow: 0 3px 0 var(--line); }
+.pointer { filter: drop-shadow(0 3px 0 rgba(44,42,90,.25)); }
+.hub { background: #fff; }
+.goalcard { box-shadow: 0 6px 0 rgba(44,42,90,.12); }
+.goalcard .eyebrow { color: rgba(44,42,90,.65); }
+.eyebrow { color: #2a7f94; }
+.stars, .balance, .hero .plus, .item .st.buy, .mcard.peek { color: var(--goldtext); }
+.chip[aria-pressed="true"] .stars { color: var(--ink); }
+.item .st.on { color: #2d8a3e; }
+.mcard { background: #f0eaff; color: #8f78e8; }
+.mcard.peek { background: #fff; }
+.notice { background: #fff7e0; border-color: #f0c35a; }
+input[type=text], input[type=number], textarea { background: #fff; }
+#toast { background: var(--fg); color: #fff; }
 </style>
 <style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -162,7 +188,7 @@ textarea { min-height: 160px; resize: vertical; }
 
 <div class="wrap">
   <header class="top">
-    <div class="brand"><h1>Stille Helden</h1><small id="tagline">Wer ist heute dran? Das weiß nur das Rad.</small></div>
+    <div class="brand"><h1>Stille Heldinnen und Helden der Klasse 6c</h1><small id="tagline">Wer ist heute dran? Das weiß nur das Rad.</small></div>
     <nav class="tabs" id="tabs" role="tablist" aria-label="Bereiche"></nav>
   </header>
   <main id="main"></main>
@@ -207,7 +233,7 @@ textarea { min-height: 160px; resize: vertical; }
     { id: 'b_space', slot: 'bg', name: 'Weltall', price: 3, val: ['#050316', '#3a1d7a'], stars: true }
   ];
   var ITEM = {}; ITEMS.forEach(function (i) { ITEM[i.id] = i; });
-  var SEG_COLORS = ['#ff4d8d', '#2dd4e6', '#ffc53d', '#8be04e', '#8b5cf6', '#ff8a3d'];
+  var SEG_COLORS = ['#ffc2d4', '#b5e8f0', '#ffe9a3', '#c9f0b2', '#d9ccff', '#ffd2ad'];
 
   var DEFAULT_GOALS = [
     'stört den Unterricht nicht', 'meldet sich oft', 'hat alle Materialien parat',
@@ -217,7 +243,7 @@ textarea { min-height: 160px; resize: vertical; }
   var SAMPLE_NAMES = ['Alisa', 'Ben', 'Christina', 'Eris', 'Giulia', 'Kati', 'Kian', 'Leandro', 'Leen', 'Lorena', 'Lorina', 'Makar', 'Milana', 'Mischa', 'Olga', 'Omar', 'Petro', 'Philipp', 'Sebi', 'Vivi'];
 
   /* ---------- Zustand ---------- */
-  var KEY = 'stille-helden-v1';
+  var KEY = 'stille-helden-6c-v1';
   var S;
   function uid() { return Math.random().toString(36).slice(2, 9); }
   function newStudent(name) { return { id: uid(), name: name, earned: 0, spent: 0, owned: [], eq: {} }; }
@@ -286,7 +312,7 @@ textarea { min-height: 160px; resize: vertical; }
     var stage = only ? 3 : stageOf(s);
     var gid = 'g' + (s.id || 'x') + Math.floor(Math.random() * 1e6);
     var colorItem = ITEM[eq.color], color = colorItem ? colorItem.val : '#6fb7ff';
-    var bgItem = ITEM[eq.bg], c1 = '#3a3796', c2 = '#2b2874', deco = '';
+    var bgItem = ITEM[eq.bg], c1 = '#e6dfff', c2 = '#cfc3ff', deco = '';
     if (bgItem) {
       c1 = bgItem.val[0]; c2 = bgItem.val[1];
       if (bgItem.stars) deco = '<g fill="#fff" opacity=".85"><circle cx="14" cy="16" r="1.6"/><circle cx="100" cy="24" r="2"/><circle cx="82" cy="10" r="1.3"/><circle cx="26" cy="40" r="1.2"/><circle cx="108" cy="58" r="1.4"/></g>';
@@ -329,7 +355,7 @@ textarea { min-height: 160px; resize: vertical; }
   addEventListener('resize', sizeConf); sizeConf();
   function confetti(n) {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var cols = ['#ff4d8d', '#2dd4e6', '#ffc53d', '#8be04e', '#8b5cf6', '#ff8a3d'];
+    var cols = ['#ff7aa8', '#4cc9d9', '#ffc93c', '#7ed957', '#9b7bff', '#ff9a52'];
     for (var i = 0; i < (n || 160); i++) parts.push({ x: innerWidth / 2 + (Math.random() - .5) * 200, y: innerHeight * 0.45, vx: (Math.random() - .5) * 16, vy: -Math.random() * 16 - 4, r: Math.random() * 6 + 4, c: cols[i % cols.length], a: Math.random() * 6, va: (Math.random() - .5) * .4, life: 140 + Math.random() * 60 });
     if (!confRun) { confRun = true; requestAnimationFrame(tickConf); }
   }
@@ -345,6 +371,11 @@ textarea { min-height: 160px; resize: vertical; }
 
   /* ---------- Glücksrad ---------- */
   function activeGoals() { return S.goals.filter(function (g) { return g.on && g.text.trim(); }); }
+  function wrapText(c, text, maxW) {
+    var words = text.split(' '), lines = [], line = '';
+    words.forEach(function (w) { var t = line ? line + ' ' + w : w; if (!line || c.measureText(t).width <= maxW) line = t; else { lines.push(line); line = w; } });
+    if (line) lines.push(line); return lines;
+  }
   function drawWheel() {
     var cv = $('#wheel'); if (!cv) return;
     var goals = activeGoals(), n = goals.length, dpr = window.devicePixelRatio || 1;
@@ -352,20 +383,24 @@ textarea { min-height: 160px; resize: vertical; }
     var c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
     var R = w / 2 - 8, cx = w / 2, cy = w / 2;
     c.clearRect(0, 0, w, w);
-    c.beginPath(); c.arc(cx, cy, R + 6, 0, 7); c.fillStyle = '#ffc53d'; c.fill();
-    if (!n) { c.fillStyle = '#2b2874'; c.beginPath(); c.arc(cx, cy, R, 0, 7); c.fill(); return; }
-    var a = Math.PI * 2 / n;
+    c.beginPath(); c.arc(cx, cy, R + 6, 0, 7); c.fillStyle = '#ffd36b'; c.fill();
+    if (!n) { c.fillStyle = '#efe9ff'; c.beginPath(); c.arc(cx, cy, R, 0, 7); c.fill(); return; }
+    var a = Math.PI * 2 / n, rOut = R - 14, rIn = R * 0.27, maxW = rOut - rIn;
     for (var i = 0; i < n; i++) {
       var s0 = wheelRot + i * a - Math.PI / 2;
       c.beginPath(); c.moveTo(cx, cy); c.arc(cx, cy, R, s0, s0 + a); c.closePath();
       c.fillStyle = SEG_COLORS[i % SEG_COLORS.length]; c.fill();
-      c.lineWidth = 3; c.strokeStyle = '#14123a'; c.stroke();
-      c.save(); c.translate(cx, cy); c.rotate(s0 + a / 2); c.textAlign = 'right'; c.textBaseline = 'middle';
-      c.fillStyle = (i % SEG_COLORS.length === 2 || i % SEG_COLORS.length === 3 || i % SEG_COLORS.length === 1) ? '#14123a' : '#fff';
-      var fs = Math.max(12, Math.min(22, w * 0.04, (R * a) * 0.34));
-      c.font = '800 ' + fs + 'px "Bricolage Grotesque", system-ui, sans-serif';
-      var t = goals[i].text.trim(); if (t.length > 22) t = t.slice(0, 21) + '…';
-      c.fillText(t, R - 16, 0); c.restore();
+      c.lineWidth = 3; c.strokeStyle = '#ffffff'; c.stroke();
+      c.save(); c.translate(cx, cy); c.rotate(s0 + a / 2); c.textAlign = 'right'; c.textBaseline = 'middle'; c.fillStyle = '#2c2a5a';
+      var t = goals[i].text.trim(), rMid = (rOut + rIn) / 2, avail = 2 * rMid * Math.sin(a / 2) * 0.86, fs, lines;
+      for (fs = 26; fs >= 12; fs--) {
+        c.font = '800 ' + fs + 'px "Bricolage Grotesque", system-ui, sans-serif'; lines = wrapText(c, t, maxW);
+        var widest = Math.max.apply(null, lines.map(function (l) { return c.measureText(l).width; }));
+        if (widest <= maxW && lines.length * fs * 1.12 <= avail) break;
+      }
+      var lh = fs * 1.12, y0 = -(lines.length - 1) * lh / 2;
+      lines.forEach(function (l, k) { c.fillText(l, rOut, y0 + k * lh); });
+      c.restore();
     }
   }
   function pickHeroes() {
@@ -417,7 +452,7 @@ textarea { min-height: 160px; resize: vertical; }
   /* ---------- Ansichten ---------- */
   function viewHeute() {
     var t = S.today, out = '';
-    if (!S.students.length) out += '<div class="notice">Noch keine Namen. Trage deine Klasse unter <b>Einstellungen</b> ein, ein Name pro Zeile.</div>';
+    if (!S.students.length) out += '<div class="notice">Noch keine Namen. Trage die Klasse 6c unter <b>Einstellungen</b> ein, ein Name pro Zeile.</div>';
     if (S.sample) out += '<div class="notice">Das sind Beispielnamen. Trage deine Klasse unter <b>Einstellungen</b> ein, dann verschwindet dieser Hinweis.</div>';
     if (!t) {
       out += '<div class="stage"><div class="wheel-box"><div class="pointer"></div><canvas id="wheel" aria-label="Glücksrad mit den Tageszielen"></canvas><div class="hub">Ziel<br>des Tages</div></div>' +
