@@ -1,0 +1,17 @@
+{
+  "name": "Stille Heldinnen und Helden",
+  "short_name": "Stille Helden",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f0e9ff",
+  "theme_color": "#f0e9ff",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
